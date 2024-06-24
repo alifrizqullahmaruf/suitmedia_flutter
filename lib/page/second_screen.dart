@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:suitmedia_flutter/page/third_screen.dart';
 
+// Import CustomElevatedButton widget
+import 'package:suitmedia_flutter/widgets/custom_elevated_button.dart';
+
 class SecondScreen extends StatefulWidget {
   final String name;
 
@@ -43,28 +46,22 @@ class _SecondScreenState extends State<SecondScreen> {
             ),
             const SizedBox(height: 40),
             Center(
-              child: SizedBox(
+              child: CustomElevatedButton(
+                onPressed: () async {
+                  final result = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ThirdScreen()),
+                  );
+                  if (result != null) {
+                    setState(() {
+                      selectedUserName = result;
+                    });
+                  }
+                },
+                text: 'Choose a User',
                 width: 250,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    final result = await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ThirdScreen()),
-                    );
-                    if (result != null) {
-                      setState(() {
-                        selectedUserName = result;
-                      });
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
-                  child: const Text('Choose a User'),
-                ),
+                borderRadius: 16,
               ),
             ),
           ],
