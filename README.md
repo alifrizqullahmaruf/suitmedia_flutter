@@ -4,6 +4,8 @@ A new Flutter project.
 
 ## Introduction
 
+![Suitmedia Flutter](https://drive.google.com/uc?export=view&id=11aE-f6toC626Mny1gjd1AcJdOHBaaQUk)
+
 Suitmedia Flutter is a mobile application built using the Flutter framework. The application consists of three main screens and demonstrates basic functionalities such as navigating between screens, state management using the Provider package, and fetching data from an API. The primary purpose of this application is to serve as a starting point for learning and understanding Flutter development concepts.
 
 ## Features
@@ -36,36 +38,22 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Project Structure
 
-### main.dart
+- `main.dart`: The entry point of the application. It sets up the `MyApp` widget and initializes the `AppState` using the Provider package.
+- `custom_elevated_button.dart`: A custom widget for an elevated button with configurable properties.
+- `app_state.dart`: Manages the state of the application, including the user's name and the selected user's name. Also contains a method to check if a text is a palindrome.
+- `first_screen.dart`: The first screen of the application, where the user can input their name and check if a text is a palindrome.
+- `second_screen.dart`: The second screen of the application, displaying the user's name and allowing navigation to the Third Screen.
+- `third_screen.dart`: The third screen of the application, fetching and displaying a list of users from an API.
 
-The entry point of the application. It sets up the `MyApp` widget and initializes the `AppState` using the Provider package.
+## How to Run
 
-```dart
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:suitmedia_flutter/model/app_state.dart';
-import 'package:suitmedia_flutter/page/first_screen.dart';
+To run the application, ensure you have Flutter installed and set up. Then, follow these steps:
 
-void main() {
-  runApp(const MyApp());
-}
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Run `flutter pub get` to install dependencies.
+4. Run `flutter run` to start the application.
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+## Conclusion
 
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => AppState(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: const FirstScreen(),
-      ),
-    );
-  }
-}
+This application serves as a practical introduction to Flutter development, showcasing essential concepts such as state management, custom widgets, and API integration. Feel free to explore and modify the code to better understand how Flutter applications are built.
