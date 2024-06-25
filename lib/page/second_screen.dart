@@ -1,23 +1,22 @@
+// lib/page/second_screen.dart
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:suitmedia_flutter/model/app_state.dart';
 import 'package:suitmedia_flutter/page/third_screen.dart';
-
-// Import CustomElevatedButton widget
 import 'package:suitmedia_flutter/widgets/custom_elevated_button.dart';
 
 class SecondScreen extends StatefulWidget {
-  final String name;
-
-  const SecondScreen({super.key, required this.name});
+  const SecondScreen({super.key});
 
   @override
   State<SecondScreen> createState() => _SecondScreenState();
 }
 
 class _SecondScreenState extends State<SecondScreen> {
-  String? selectedUserName;
-
   @override
   Widget build(BuildContext context) {
+    final appState = context.watch<AppState>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Second Screen'),
@@ -36,12 +35,12 @@ class _SecondScreenState extends State<SecondScreen> {
             ),
             const SizedBox(height: 20),
             Text(
-              'Name: ${widget.name}',
+              'Name: ${appState.name}',
               style: const TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 20),
             Text(
-              'Selected User Name: ${selectedUserName ?? 'None'}',
+              'Selected User Name: ${appState.selectedUserName ?? 'None'}',
               style: const TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 40),
@@ -54,9 +53,7 @@ class _SecondScreenState extends State<SecondScreen> {
                         builder: (context) => const ThirdScreen()),
                   );
                   if (result != null) {
-                    setState(() {
-                      selectedUserName = result;
-                    });
+                    context.read<AppState>().setSelectedUserName(result);
                   }
                 },
                 text: 'Choose a User',

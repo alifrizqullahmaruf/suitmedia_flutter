@@ -1,4 +1,7 @@
+// lib/page/first_screen.dart
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:suitmedia_flutter/model/app_state.dart';
 import 'package:suitmedia_flutter/page/second_screen.dart';
 import 'package:suitmedia_flutter/widgets/custom_elevated_button.dart';
 
@@ -18,11 +21,6 @@ class _FirstScreenState extends State<FirstScreen> {
     nameController.dispose();
     palindromeController.dispose();
     super.dispose();
-  }
-
-  bool isPalindrome(String text) {
-    String reversedText = text.split('').reversed.join('');
-    return text == reversedText;
   }
 
   @override
@@ -47,7 +45,6 @@ class _FirstScreenState extends State<FirstScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  // Image with rounded corners circle
                   ClipOval(
                     child: Image.network(
                       'https://i.pinimg.com/236x/7a/87/f7/7a87f754fc4d20a85e19410ee598f321.jpg',
@@ -56,10 +53,7 @@ class _FirstScreenState extends State<FirstScreen> {
                       fit: BoxFit.cover,
                     ),
                   ),
-
-                  SizedBox(height: 20),
-
-                  // TextField name with border radius 16
+                  const SizedBox(height: 20),
                   SizedBox(
                     width: 250,
                     child: TextField(
@@ -74,10 +68,7 @@ class _FirstScreenState extends State<FirstScreen> {
                       ),
                     ),
                   ),
-
-                  SizedBox(height: 20),
-
-                  // TextField palindrome with border radius 16
+                  const SizedBox(height: 20),
                   SizedBox(
                     width: 250,
                     child: TextField(
@@ -92,13 +83,11 @@ class _FirstScreenState extends State<FirstScreen> {
                       ),
                     ),
                   ),
-
-                  SizedBox(height: 100),
-
+                  const SizedBox(height: 100),
                   CustomElevatedButton(
                     onPressed: () {
                       String text = palindromeController.text;
-                      bool result = isPalindrome(text);
+                      bool result = context.read<AppState>().isPalindrome(text);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(result
@@ -109,17 +98,14 @@ class _FirstScreenState extends State<FirstScreen> {
                     },
                     text: 'Check',
                   ),
-
-                  SizedBox(height: 20),
-
-                  // Reusable Button next to the "SecondScreen" class with infinite border radius
+                  const SizedBox(height: 20),
                   CustomElevatedButton(
                     onPressed: () {
+                      context.read<AppState>().setName(nameController.text);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              SecondScreen(name: nameController.text),
+                          builder: (context) => const SecondScreen(),
                         ),
                       );
                     },
